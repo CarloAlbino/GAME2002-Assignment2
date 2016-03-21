@@ -1,0 +1,68 @@
+﻿Build started 2016-03-21 8:18:23 AM.
+     1>Project "C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\GAME2002_A2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Carlo Albino\Documents\SFML-2.3.2-windows-vc12-32-bit\SFML-2.3.2\include" /I"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\Include" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\Aircraft.cpp source\Application.cpp source\Button.cpp source\Command.cpp source\CommandQueue.cpp source\Component.cpp source\Container.cpp source\DataTables.cpp source\Entity.cpp source\GameOverState.cpp source\GameState.cpp source\Label.cpp source\Main.cpp source\MenuState.cpp source\PauseState.cpp source\Pickup.cpp source\Player.cpp source\Projectile.cpp source\SceneNode.cpp source\SettingsState.cpp source\SpriteNode.cpp source\State.cpp source\StateStack.cpp source\TextNode.cpp source\TitleState.cpp source\Utility.cpp source\World.cpp
+         World.cpp
+         Utility.cpp
+         TitleState.cpp
+         TextNode.cpp
+         StateStack.cpp
+         State.cpp
+         SpriteNode.cpp
+         SettingsState.cpp
+         SceneNode.cpp
+         Projectile.cpp
+         Player.cpp
+         Pickup.cpp
+         PauseState.cpp
+         MenuState.cpp
+         Main.cpp
+         Label.cpp
+         GameState.cpp
+         GameOverState.cpp
+         Entity.cpp
+         DataTables.cpp
+         Generating Code...
+         Compiling...
+         Container.cpp
+         Component.cpp
+         CommandQueue.cpp
+         Command.cpp
+         Button.cpp
+         Application.cpp
+         Aircraft.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\Debug\GAME2002_A2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Carlo Albino\Documents\SFML-2.3.2-windows-vc12-32-bit\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\Debug\GAME2002_A2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\Debug\GAME2002_A2.lib" /MACHINE:X86 Debug\Aircraft.obj
+         Debug\Application.obj
+         Debug\Button.obj
+         Debug\Command.obj
+         Debug\CommandQueue.obj
+         Debug\Component.obj
+         Debug\Container.obj
+         Debug\DataTables.obj
+         Debug\Entity.obj
+         Debug\GameOverState.obj
+         Debug\GameState.obj
+         Debug\Label.obj
+         Debug\Main.obj
+         Debug\MenuState.obj
+         Debug\PauseState.obj
+         Debug\Pickup.obj
+         Debug\Player.obj
+         Debug\Projectile.obj
+         Debug\SceneNode.obj
+         Debug\SettingsState.obj
+         Debug\SpriteNode.obj
+         Debug\State.obj
+         Debug\StateStack.obj
+         Debug\TextNode.obj
+         Debug\TitleState.obj
+         Debug\Utility.obj
+         Debug\World.obj
+         GAME2002_A2.vcxproj -> C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\Debug\GAME2002_A2.exe
+     1>Done Building Project "C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\GAME2002_A2\GAME2002_A2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:26.60
