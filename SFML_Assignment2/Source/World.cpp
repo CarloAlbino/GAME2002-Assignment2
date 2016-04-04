@@ -10,9 +10,10 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <iostream>
 
 
-World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
+World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds, Player& player)
 : mTarget(outputTarget)
 , mSceneTexture()
 , mWorldView(outputTarget.getDefaultView())
@@ -27,6 +28,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
 , mActiveEnemies()
+, mPlayer(player)
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
 
@@ -58,6 +60,15 @@ void World::update(sf::Time dt)
 	// Remove all destroyed entities, create new ones
 	mSceneGraph.removeWrecks();
 	spawnEnemies();
+
+	if (mPlayer.canMoveToMouse())
+	{
+		//std::cout << "Moving to mouse" << std::endl;
+	}
+	else
+	{
+		//std::cout << "NOT moving to mouse" << std::endl;
+	}
 
 	// Regular update step, adapt position (correct if outside view)
 	mSceneGraph.update(dt, mCommandQueue);

@@ -6,6 +6,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 using namespace std::placeholders;
 
@@ -39,6 +40,9 @@ Player::Player()
 	// Set initial action bindings
 	initializeActions();	
 
+	// Initialize mToMouse
+	mToMouse = false;
+
 	// Assign all categories to player's aircraft
 	FOREACH(auto& pair, mActionBinding)
 		pair.second.category = Category::PlayerAircraft;
@@ -52,6 +56,13 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 		auto found = mKeyBinding.find(event.key.code);
 		if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
 			commands.push(mActionBinding[found->second]);
+		mToMouse = false;
+	}
+
+	if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		std::cout << "Left Button Pressed..." << std::endl;
+		mToMouse = true;
 	}
 }
 
@@ -126,4 +137,9 @@ bool Player::isRealtimeAction(Action action)
 		default:
 			return false;
 	}
+}
+
+bool Player::canMoveToMouse()
+{
+	return mToMouse;
 }

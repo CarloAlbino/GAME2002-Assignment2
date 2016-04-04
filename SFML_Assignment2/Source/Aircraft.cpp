@@ -40,6 +40,7 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mDirectionIndex(0)
 , mHealthDisplay(nullptr)
 , mMissileDisplay(nullptr)
+, mToMouse(false)
 {
 	mExplosion.setFrameSize(sf::Vector2i(256, 256));
 	mExplosion.setNumFrames(16);
@@ -349,4 +350,16 @@ void Aircraft::updateRollAnimation()
 
 		mSprite.setTextureRect(textureRect);
 	}
+}
+
+//[Carlo]
+
+void Aircraft::setToMouse(bool b)
+{
+	mToMouse = b;
+}
+
+bool Aircraft::canMoveToMouse()
+{
+	return mToMouse;
 }

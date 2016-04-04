@@ -21,6 +21,7 @@ class Player
 			MoveDown,
 			Fire,
 			LaunchMissile,
+			MouseClick,
 			ActionCount
 		};
 
@@ -44,6 +45,9 @@ class Player
 		void 					setMissionStatus(MissionStatus status);
 		MissionStatus 			getMissionStatus() const;
 
+		//[Carlo]
+		bool					canMoveToMouse();
+
 	private:
 		void					initializeActions();
 		static bool				isRealtimeAction(Action action);
@@ -53,6 +57,9 @@ class Player
 		std::map<sf::Keyboard::Key, Action>		mKeyBinding;
 		std::map<Action, Command>				mActionBinding;
 		MissionStatus 							mCurrentMissionStatus;
+
+		//[Carlo]
+		bool									mToMouse;
 };
 
 #endif // BOOK_PLAYER_HPP

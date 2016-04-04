@@ -10,6 +10,7 @@
 #include <Book/Command.hpp>
 #include <Book/BloomEffect.hpp>
 #include <Book/SoundPlayer.hpp>
+#include <Book/Player.hpp>
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -28,7 +29,7 @@ namespace sf
 class World : private sf::NonCopyable
 {
 	public:
-											World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds);
+											World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds, Player& player);
 		void								update(sf::Time dt);
 		void								draw();
 		
@@ -100,6 +101,9 @@ class World : private sf::NonCopyable
 		std::vector<Aircraft*>				mActiveEnemies;
 
 		BloomEffect							mBloomEffect;
+
+		//[Carlo]
+		Player&								mPlayer;
 };
 
 #endif // BOOK_WORLD_HPP
