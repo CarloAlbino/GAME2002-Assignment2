@@ -47,6 +47,7 @@ class Player
 
 		//[Carlo]
 		bool					canMoveToMouse();
+		void					setMoveToMouse(bool b);
 
 	private:
 		void					initializeActions();

@@ -139,7 +139,14 @@ bool Player::isRealtimeAction(Action action)
 	}
 }
 
+//[Carlo]
+
 bool Player::canMoveToMouse()
 {
 	return mToMouse;
+}
+
+void Player::setMoveToMouse(bool b)
+{
+	mToMouse = b;
 }

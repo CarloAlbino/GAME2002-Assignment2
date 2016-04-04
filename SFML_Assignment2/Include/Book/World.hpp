@@ -29,7 +29,7 @@ namespace sf
 class World : private sf::NonCopyable
 {
 	public:
-											World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds, Player& player);
+											World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds, Player& player, sf::Window& window);
 		void								update(sf::Time dt);
 		void								draw();
 		
@@ -37,6 +37,9 @@ class World : private sf::NonCopyable
 
 		bool 								hasAlivePlayer() const;
 		bool 								hasPlayerReachedEnd() const;
+
+		//[Carlo]
+		void								moveToMousePos();
 
 
 	private:
@@ -104,6 +107,10 @@ class World : private sf::NonCopyable
 
 		//[Carlo]
 		Player&								mPlayer;
+		bool								mArrivedAtPosition;
+		bool								mCanGetMousePos;
+		sf::Vector2f						mNextTarget;
+		sf::Window&							mWindow;
 };
 
 #endif // BOOK_WORLD_HPP
