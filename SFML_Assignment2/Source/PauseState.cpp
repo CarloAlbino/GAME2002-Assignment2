@@ -89,6 +89,11 @@ bool PauseState::update(sf::Time)
 			returnToMainMenu();
 		}
 	}
+	else
+	{
+		checkForButton(0);
+		checkForButton(1);
+	}
 
 	return false;
 }
@@ -111,6 +116,7 @@ bool PauseState::checkForButton(int buttonNum)
 		mouseY > mGUIContainer.getChild(buttonNum)->getPosition().y &&
 		mouseY < mGUIContainer.getChild(buttonNum)->getPosition().y + 50.f)
 	{
+		mGUIContainer.select(buttonNum);
 		return true;
 	}
 	else

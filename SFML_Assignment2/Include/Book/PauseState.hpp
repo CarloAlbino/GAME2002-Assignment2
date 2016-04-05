@@ -31,7 +31,7 @@ class PauseState : public State
 		GUI::Container 		mGUIContainer;
 
 		//[Carlo]
-		sf::RenderWindow&			mWindow;
+		sf::RenderWindow&	mWindow;
 		sf::Sprite			mButton1;
 		sf::Sprite			mButton2;
 };
