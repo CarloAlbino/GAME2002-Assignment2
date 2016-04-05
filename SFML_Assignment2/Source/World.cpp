@@ -10,9 +10,11 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <iostream>
+#include <stdlib.h>
 
 
-World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
+World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds, Player& player, sf::Window& window)
 : mTarget(outputTarget)
 , mSceneTexture()
 , mWorldView(outputTarget.getDefaultView())
@@ -27,6 +29,10 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
 , mActiveEnemies()
+, mPlayer(player)
+, mArrivedAtPosition(false)
+, mCanGetMousePos(true)
+, mWindow(window)
 {
 	mSceneTexture.create(mTarget.getSize().x, mTarget.getSize().y);
 
@@ -58,6 +64,28 @@ void World::update(sf::Time dt)
 	// Remove all destroyed entities, create new ones
 	mSceneGraph.removeWrecks();
 	spawnEnemies();
+
+
+	if (mPlayer.canMoveToMouse())
+	{
+		if (mCanGetMousePos)
+		{
+			mNextTarget = mTarget.mapPixelToCoords(sf::Mouse::getPosition(mWindow), mWorldView);
+			mArrivedAtPosition = false;
+			mCanGetMousePos = false;
+		}
+		//std::cout << "Moving to mouse" << std::endl;
+		if (!mArrivedAtPosition)
+		{
+			// Moving to mouse position
+			moveToMousePos();
+		}
+		else
+		{
+			mPlayer.setMoveToMouse(false);
+			mCanGetMousePos = true;
+		}
+	}
 
 	// Regular update step, adapt position (correct if outside view)
 	mSceneGraph.update(dt, mCommandQueue);
@@ -391,4 +419,24 @@ sf::FloatRect World::getBattlefieldBounds() const
 	bounds.height += 100.f;
 
 	return bounds;
+}
+
+void World::moveToMousePos()
+{
+	sf::Vector2f newPlayerPosition;
+	newPlayerPosition = mNextTarget - mPlayerAircraft->getPosition();	// Find the vector from the player to the mouse position
+	float newMagnitude = sqrt(pow(newPlayerPosition.x, 2) + pow(newPlayerPosition.y, 2));	// Find the length of that vector
+	if (newMagnitude > 15.f){						// if the vector length is greater than 15 continue
+		newPlayerPosition.x /= newMagnitude;		//
+		newPlayerPosition.y /= newMagnitude;		// Normalize the vector
+		// Set speed to 15
+		newPlayerPosition *= 15.f;
+		// Send new position to the airplane
+		newPlayerPosition += mPlayerAircraft->getPosition();	// Add the new position to the player's current position
+		mPlayerAircraft->setPosition(newPlayerPosition);		// Set the player's new position
+	}
+	else
+	{
+		mArrivedAtPosition = true;
+	}
 }
