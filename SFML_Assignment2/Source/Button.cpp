@@ -108,4 +108,9 @@ void Button::changeTexture(Type buttonType)
 	mSprite.setTextureRect(textureRect);
 }
 
+sf::Sprite Button::getSprite()
+{
+	return mSprite;
+}
+
 }

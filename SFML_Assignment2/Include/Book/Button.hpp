@@ -51,6 +51,8 @@ class Button : public Component
 
         virtual void			handleEvent(const sf::Event& event);
 
+		//[Carlo]
+		sf::Sprite				getSprite();
 
     private:
         virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const;

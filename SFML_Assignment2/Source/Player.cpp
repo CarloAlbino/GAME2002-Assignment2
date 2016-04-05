@@ -61,7 +61,7 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 
 	if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		std::cout << "Left Button Pressed..." << std::endl;
+		//std::cout << "Left Button Pressed..." << std::endl;
 		mToMouse = true;
 	}
 }

@@ -3,6 +3,8 @@
 
 #include <Book/Component.hpp>
 
+#include <SFML/Graphics/Sprite.hpp>
+
 #include <vector>
 #include <memory>
 
@@ -23,6 +25,9 @@ class Container : public Component
 
         virtual bool		isSelectable() const;
         virtual void		handleEvent(const sf::Event& event);
+
+		//[Carlo]
+		Component::Ptr		getChild(int childNum);
 
 
     private:
