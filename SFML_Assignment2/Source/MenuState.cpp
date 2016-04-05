@@ -31,7 +31,8 @@ MenuState::MenuState(StateStack& stack, Context context)
 	settingsButton->setText("Settings");
 	settingsButton->setCallback([this] ()
 	{
-		requestStackPush(States::Settings);
+		goToSettings();
+		//requestStackPush(States::Settings);
 	});
 
 	auto exitButton = std::make_shared<GUI::Button>(context);
@@ -63,6 +64,24 @@ void MenuState::draw()
 
 bool MenuState::update(sf::Time)
 {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		// Return to game
+		if (checkForButton(0))
+			startGame();
+		// Return to menu
+		if (checkForButton(1))
+			goToSettings();
+		// Quit game
+		if (checkForButton(2))
+			quitGame();
+	}
+	else
+	{
+		for (int i = 0; i < 3; i++)
+			checkForButton(i);
+	}
+
 	return true;
 }
 
@@ -70,6 +89,28 @@ bool MenuState::handleEvent(const sf::Event& event)
 {
 	mGUIContainer.handleEvent(event);
 	return false;
+}
+
+//[Carlo]
+
+bool MenuState::checkForButton(int buttonNum)
+{
+	int mouseX = sf::Mouse::getPosition(mWindow).x;
+	int mouseY = sf::Mouse::getPosition(mWindow).y;
+
+	if (mouseX > mGUIContainer.getChild(buttonNum)->getPosition().x &&
+		mouseX < mGUIContainer.getChild(buttonNum)->getPosition().x + 200.f &&
+		mouseY > mGUIContainer.getChild(buttonNum)->getPosition().y &&
+		mouseY < mGUIContainer.getChild(buttonNum)->getPosition().y + 50.f)
+	{
+		mGUIContainer.select(buttonNum);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 void MenuState::startGame()

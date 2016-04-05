@@ -76,18 +76,10 @@ bool PauseState::update(sf::Time)
 	{
 		// Return to game
 		if (checkForButton(0))
-		{
-			//std::cout << "Clicked on button... Return" << std::endl;
 			pauseGame();
-		}
-
-
 		// Return to menu
 		if (checkForButton(1))
-		{
-			//std::cout << "Clicked on button... Menu" << std::endl;
 			returnToMainMenu();
-		}
 	}
 	else
 	{

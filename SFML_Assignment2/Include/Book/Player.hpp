@@ -21,7 +21,6 @@ class Player
 			MoveDown,
 			Fire,
 			LaunchMissile,
-			MouseClick,
 			ActionCount
 		};
 
