@@ -8,6 +8,7 @@
 SettingsState::SettingsState(StateStack& stack, Context context)
 : State(stack, context)
 , mGUIContainer()
+, mWindow(*context.window)
 {
 	mBackgroundSprite.setTexture(context.textures->get(Textures::TitleScreen));
 	
@@ -39,6 +40,18 @@ void SettingsState::draw()
 
 bool SettingsState::update(sf::Time)
 {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		// Return to game
+		if (checkForButton(12))
+			requestStackPop();
+	}
+	else
+	{
+		for (int i = 4; i < 13; i++)
+			checkForButton(i);
+	}
+
 	return true;
 }
 
@@ -93,4 +106,25 @@ void SettingsState::addButtonLabel(Player::Action action, float y, const std::st
 
 	mGUIContainer.pack(mBindingButtons[action]);
 	mGUIContainer.pack(mBindingLabels[action]);
+}
+
+//[Carlo]
+
+bool SettingsState::checkForButton(int buttonNum)
+{
+	int mouseX = sf::Mouse::getPosition(mWindow).x;
+	int mouseY = sf::Mouse::getPosition(mWindow).y;
+
+	if (mouseX > mGUIContainer.getChild(buttonNum)->getPosition().x &&
+		mouseX < mGUIContainer.getChild(buttonNum)->getPosition().x + 200.f &&
+		mouseY > mGUIContainer.getChild(buttonNum)->getPosition().y &&
+		mouseY < mGUIContainer.getChild(buttonNum)->getPosition().y + 50.f)
+	{
+		mGUIContainer.select(buttonNum);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

@@ -3,6 +3,8 @@
 
 #include <Book/Component.hpp>
 
+#include <SFML/Graphics/Sprite.hpp>
+
 #include <vector>
 #include <memory>
 
@@ -24,12 +26,15 @@ class Container : public Component
         virtual bool		isSelectable() const;
         virtual void		handleEvent(const sf::Event& event);
 
+		//[Carlo]
+		Component::Ptr		getChild(int childNum);
+		void				select(std::size_t index);
 
     private:
         virtual void		draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
         bool				hasSelection() const;
-        void				select(std::size_t index);
+        
         void				selectNext();
         void				selectPrevious();
 

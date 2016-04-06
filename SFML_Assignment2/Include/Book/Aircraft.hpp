@@ -41,6 +41,10 @@ class Aircraft : public Entity
 		void					launchMissile();
 		void					playLocalSound(CommandQueue& commands, SoundEffect::ID effect);
 
+		//[Carlo]
+		void					setToMouse(bool b);
+		bool					canMoveToMouse();
+
 
 	private:
 		virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -79,6 +83,9 @@ class Aircraft : public Entity
 		std::size_t				mDirectionIndex;
 		TextNode*				mHealthDisplay;
 		TextNode*				mMissileDisplay;
+
+		//[Carlo]
+		bool					mToMouse;
 };
 
 #endif // BOOK_AIRCRAFT_HPP
