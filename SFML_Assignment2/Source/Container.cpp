@@ -108,4 +108,11 @@ void Container::selectPrevious()
 	select(prev);
 }
 
+//[Carlo]
+
+Component::Ptr Container::getChild(int childNum)
+{
+	return mChildren[childNum];
+}
+
 }

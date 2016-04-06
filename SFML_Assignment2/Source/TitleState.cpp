@@ -38,6 +38,12 @@ bool TitleState::update(sf::Time dt)
 		mTextEffectTime = sf::Time::Zero;
 	}
 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		requestStackPop();
+		requestStackPush(States::Menu);
+	}
+
 	return true;
 }
 

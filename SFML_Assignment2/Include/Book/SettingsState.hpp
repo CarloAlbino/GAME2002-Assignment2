@@ -26,13 +26,18 @@ class SettingsState : public State
 	private:
 		void							updateLabels();
 		void							addButtonLabel(Player::Action action, float y, const std::string& text, Context context);
-
-
+	
+	//[Carlo]
+		bool							checkForButton(int buttonNum);
+		
 	private:
 		sf::Sprite											mBackgroundSprite;
 		GUI::Container										mGUIContainer;
 		std::array<GUI::Button::Ptr, Player::ActionCount>	mBindingButtons;
 		std::array<GUI::Label::Ptr, Player::ActionCount> 	mBindingLabels;
+
+		//[Carlo]
+		sf::RenderWindow&				mWindow;
 };
 
 #endif // BOOK_SETTINGSSTATE_HPP
