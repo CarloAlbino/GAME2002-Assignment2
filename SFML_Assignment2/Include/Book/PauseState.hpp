@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Window.hpp>
 
 
 class PauseState : public State
@@ -18,11 +19,21 @@ class PauseState : public State
 		virtual bool		update(sf::Time dt);
 		virtual bool		handleEvent(const sf::Event& event);
 
+	//[Carlo]
+	private:
+		bool				checkForButton(int buttonNum);
+		void				pauseGame();
+		void				returnToMainMenu();
 
 	private:
 		sf::Sprite			mBackgroundSprite;
 		sf::Text			mPausedText;
 		GUI::Container 		mGUIContainer;
+
+		//[Carlo]
+		sf::RenderWindow&	mWindow;
+		sf::Sprite			mButton1;
+		sf::Sprite			mButton2;
 };
 
 #endif // BOOK_PAUSESTATE_HPP

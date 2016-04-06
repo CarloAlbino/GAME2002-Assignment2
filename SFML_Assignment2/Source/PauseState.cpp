@@ -8,12 +8,14 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
+#include <iostream>
 
 PauseState::PauseState(StateStack& stack, Context context)
 : State(stack, context)
 , mBackgroundSprite()
 , mPausedText()
 , mGUIContainer()
+, mWindow(*context.window)
 {
 	sf::Font& font = context.fonts->get(Fonts::Main);
 	sf::Vector2f windowSize(context.window->getSize());
@@ -29,16 +31,18 @@ PauseState::PauseState(StateStack& stack, Context context)
 	returnButton->setText("Return");
 	returnButton->setCallback([this] ()
 	{
-		requestStackPop();
+		pauseGame();
+		//requestStackPop();
 	});
-
+	
 	auto backToMenuButton = std::make_shared<GUI::Button>(context);
 	backToMenuButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + 125);
 	backToMenuButton->setText("Back to menu");
 	backToMenuButton->setCallback([this] ()
 	{
-		requestStateClear();
-		requestStackPush(States::Menu);
+		returnToMainMenu();
+		//requestStateClear();
+		//requestStackPush(States::Menu);
 	});
 
 	mGUIContainer.pack(returnButton);
@@ -68,6 +72,21 @@ void PauseState::draw()
 
 bool PauseState::update(sf::Time)
 {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		// Return to game
+		if (checkForButton(0))
+			pauseGame();
+		// Return to menu
+		if (checkForButton(1))
+			returnToMainMenu();
+	}
+	else
+	{
+		checkForButton(0);
+		checkForButton(1);
+	}
+
 	return false;
 }
 
@@ -75,4 +94,37 @@ bool PauseState::handleEvent(const sf::Event& event)
 {
 	mGUIContainer.handleEvent(event);
 	return false;
+}
+
+//[Carlo]
+
+bool PauseState::checkForButton(int buttonNum)
+{
+	int mouseX = sf::Mouse::getPosition(mWindow).x;
+	int mouseY = sf::Mouse::getPosition(mWindow).y;
+
+	if (mouseX > mGUIContainer.getChild(buttonNum)->getPosition().x &&
+		mouseX < mGUIContainer.getChild(buttonNum)->getPosition().x + 200.f &&
+		mouseY > mGUIContainer.getChild(buttonNum)->getPosition().y &&
+		mouseY < mGUIContainer.getChild(buttonNum)->getPosition().y + 50.f)
+	{
+		mGUIContainer.select(buttonNum);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+void PauseState::pauseGame()
+{
+	requestStackPop();
+}
+
+void PauseState::returnToMainMenu()
+{
+	requestStateClear();
+	requestStackPush(States::Menu);
 }
