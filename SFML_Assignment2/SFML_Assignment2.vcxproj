@@ -109,6 +109,7 @@
     <ClCompile Include="source\TitleState.cpp" />
     <ClCompile Include="source\Utility.cpp" />
     <ClCompile Include="source\World.cpp" />
+    <ClCompile Include="Source\World2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\book\ResourceHolder.inl" />
@@ -155,6 +156,7 @@
     <ClInclude Include="include\book\TitleState.hpp" />
     <ClInclude Include="include\book\Utility.hpp" />
     <ClInclude Include="include\book\World.hpp" />
+    <ClInclude Include="Include\Book\World2.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

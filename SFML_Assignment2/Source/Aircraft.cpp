@@ -343,22 +343,22 @@ void Aircraft::createBullets2(SceneNode& node, const TextureHolder& textures) co
 {
 	Projectile::Type type = isAllied() ? Projectile::AlliedBullet : Projectile::EnemyBullet;
 
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0, 1));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5, 0.8));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5, 0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.8, 0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, 0));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.8, -0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, -0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5, -0.8));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0, -1));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, -0.8));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, -0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.8, -0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, 0));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.8, 0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, 0.5));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, 0.8));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.f, 1.f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5f, 0.8f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5f, 0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.8f, 0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1.f, 0.f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.8f, -0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5f, -0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5f, -0.8f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.f, -1.f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5f, -0.8f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5f, -0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.8f, -0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1.f, 0.f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.8f, 0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5f, 0.5f));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5f, 0.8f));
 }
 
 void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures, sf::Vector2f dir) const

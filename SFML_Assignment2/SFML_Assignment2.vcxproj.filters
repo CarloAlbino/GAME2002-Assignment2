@@ -120,6 +120,9 @@
     <ClCompile Include="source\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\World2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\book\ResourceHolder.inl">
@@ -248,6 +251,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\book\World.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Book\World2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

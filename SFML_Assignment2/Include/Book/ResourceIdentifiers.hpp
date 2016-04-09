@@ -17,6 +17,7 @@ namespace Textures
 	{
 		Entities,
 		Jungle,
+		Lava,
 		TitleScreen,
 		Buttons,
 		Explosion,

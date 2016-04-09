@@ -6,8 +6,10 @@
 
 GameState::GameState(StateStack& stack, Context context)
 : State(stack, context)
+, mWorld2(*context.window, *context.fonts, *context.sounds, *context.player, *context.window)
 , mWorld(*context.window, *context.fonts, *context.sounds, *context.player, *context.window)
 , mPlayer(*context.player)
+, currentLevelNum(0)
 {
 	mPlayer.setMissionStatus(Player::MissionRunning);
 
@@ -17,26 +19,68 @@ GameState::GameState(StateStack& stack, Context context)
 
 void GameState::draw()
 {
-	mWorld.draw();
+	switch (currentLevelNum)
+	{
+	case 0:
+		mWorld.draw();
+		break;
+	case 1:
+		mWorld2.draw();
+		break;
+	default:
+		break;
+	}
 }
 
 bool GameState::update(sf::Time dt)
 {
-	mWorld.update(dt);
-
-	if (!mWorld.hasAlivePlayer())
+	switch (currentLevelNum)
 	{
-		mPlayer.setMissionStatus(Player::MissionFailure);
-		requestStackPush(States::GameOver);
-	}
-	else if (mWorld.hasPlayerReachedEnd())
-	{
-		mPlayer.setMissionStatus(Player::MissionSuccess);
-		requestStackPush(States::GameOver);
+	case 0:
+		mWorld.update(dt);
+
+		if (!mWorld.hasAlivePlayer())
+		{
+			mPlayer.setMissionStatus(Player::MissionFailure);
+			requestStackPush(States::GameOver);
+		}
+		else if (mWorld.hasPlayerReachedEnd())
+		{
+			//mPlayer.setMissionStatus(Player::MissionSuccess);
+			//requestStackPush(States::GameOver);
+			currentLevelNum++;
+		}
+
+		break;
+	case 1:
+		mWorld2.update(dt);
+
+		if (!mWorld2.hasAlivePlayer())
+		{
+			mPlayer.setMissionStatus(Player::MissionFailure);
+			requestStackPush(States::GameOver);
+		}
+		else if (mWorld2.hasPlayerReachedEnd())
+		{
+			mPlayer.setMissionStatus(Player::MissionSuccess);
+			requestStackPush(States::GameOver);
+		}
+
+		break;
+	default:
+		break;
 	}
 
-	CommandQueue& commands = mWorld.getCommandQueue();
-	mPlayer.handleRealtimeInput(commands);
+	if (currentLevelNum = 0)
+	{
+		CommandQueue& commands = mWorld.getCommandQueue();
+		mPlayer.handleRealtimeInput(commands);
+	}
+	else if (currentLevelNum = 1)
+	{
+		CommandQueue& commands2 = mWorld2.getCommandQueue();
+		mPlayer.handleRealtimeInput(commands2);
+	}
 
 	return true;
 }

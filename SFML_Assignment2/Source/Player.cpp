@@ -122,7 +122,7 @@ void Player::initializeActions()
 	mActionBinding[MoveDown].action      = derivedAction<Aircraft>(AircraftMover( 0, +1));
 	mActionBinding[Fire].action          = derivedAction<Aircraft>([] (Aircraft& a, sf::Time) { a.fire(); });
 	mActionBinding[LaunchMissile].action = derivedAction<Aircraft>([] (Aircraft& a, sf::Time) { a.launchMissile(); });
-	mActionBinding[FireArc].action = derivedAction<Aircraft>([](Aircraft& a, sf::Time) { a.fireArc(); });
+	mActionBinding[FireArc].action	   	 = derivedAction<Aircraft>([](Aircraft& a, sf::Time) { a.fireArc(); });
 }
 
 bool Player::isRealtimeAction(Action action)
