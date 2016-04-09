@@ -88,6 +88,8 @@
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\GameOverState.cpp" />
     <ClCompile Include="source\GameState.cpp" />
+    <ClCompile Include="Source\GameState2.cpp" />
+    <ClCompile Include="Source\GameState3.cpp" />
     <ClCompile Include="source\Label.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="source\MenuState.cpp" />
@@ -109,6 +111,8 @@
     <ClCompile Include="source\TitleState.cpp" />
     <ClCompile Include="source\Utility.cpp" />
     <ClCompile Include="source\World.cpp" />
+    <ClCompile Include="Source\World2.cpp" />
+    <ClCompile Include="Source\World3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\book\ResourceHolder.inl" />
@@ -131,6 +135,8 @@
     <ClInclude Include="include\book\Foreach.hpp" />
     <ClInclude Include="include\book\GameOverState.hpp" />
     <ClInclude Include="include\book\GameState.hpp" />
+    <ClInclude Include="Include\Book\GameState2.hpp" />
+    <ClInclude Include="Include\Book\GameState3.hpp" />
     <ClInclude Include="include\book\Label.hpp" />
     <ClInclude Include="include\book\MenuState.hpp" />
     <ClInclude Include="include\book\MusicPlayer.hpp" />
@@ -155,6 +161,8 @@
     <ClInclude Include="include\book\TitleState.hpp" />
     <ClInclude Include="include\book\Utility.hpp" />
     <ClInclude Include="include\book\World.hpp" />
+    <ClInclude Include="Include\Book\World2.hpp" />
+    <ClInclude Include="Include\Book\World3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

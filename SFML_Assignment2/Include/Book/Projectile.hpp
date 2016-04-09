@@ -15,6 +15,7 @@ class Projectile : public Entity
 			AlliedBullet,
 			EnemyBullet,
 			Missile,
+			BulletSpread,
 			TypeCount
 		};
 
@@ -29,7 +30,6 @@ class Projectile : public Entity
 		virtual sf::FloatRect	getBoundingRect() const;
 		float					getMaxSpeed() const;
 		int						getDamage() const;
-
 	
 	private:
 		virtual void			updateCurrent(sf::Time dt, CommandQueue& commands);

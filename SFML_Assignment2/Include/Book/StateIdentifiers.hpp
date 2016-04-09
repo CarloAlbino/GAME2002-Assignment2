@@ -10,6 +10,8 @@ namespace States
 		Title,
 		Menu,
 		Game,
+		Game2, 
+		Game3,
 		Loading,
 		Pause,
 		Settings,

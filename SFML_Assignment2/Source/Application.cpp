@@ -4,6 +4,8 @@
 #include <Book/StateIdentifiers.hpp>
 #include <Book/TitleState.hpp>
 #include <Book/GameState.hpp>
+#include <Book/GameState2.hpp>
+#include <Book/GameState3.hpp>
 #include <Book/MenuState.hpp>
 #include <Book/PauseState.hpp>
 #include <Book/SettingsState.hpp>
@@ -13,7 +15,7 @@
 const sf::Time Application::TimePerFrame = sf::seconds(1.f/60.f);
 
 Application::Application()
-: mWindow(sf::VideoMode(1024, 768), "Audio", sf::Style::Close)
+: mWindow(sf::VideoMode(1024, 768), "GAME GAME", sf::Style::Close)
 , mTextures()
 , mFonts()
 , mPlayer()
@@ -115,6 +117,8 @@ void Application::registerStates()
 	mStateStack.registerState<TitleState>(States::Title);
 	mStateStack.registerState<MenuState>(States::Menu);
 	mStateStack.registerState<GameState>(States::Game);
+	mStateStack.registerState<GameState2>(States::Game2);
+	mStateStack.registerState<GameState3>(States::Game3);
 	mStateStack.registerState<PauseState>(States::Pause);
 	mStateStack.registerState<SettingsState>(States::Settings);
 	mStateStack.registerState<GameOverState>(States::GameOver);

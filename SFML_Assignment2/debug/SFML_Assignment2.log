@@ -1,8 +1,41 @@
-﻿Build started 2016-04-05 3:12:22 PM.
+﻿Build started 2016-04-09 6:56:16 PM.
      1>Project "C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\SFML_Assignment2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\\Include\include" /I"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\\Include" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\TitleState.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\\Include\include" /I"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\\Include" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\GameState2.cpp Source\GameState3.cpp Source\World2.cpp Source\World3.cpp source\Aircraft.cpp source\Application.cpp source\BloomEffect.cpp source\Button.cpp source\DataTables.cpp source\EmitterNode.cpp source\GameOverState.cpp source\GameState.cpp source\Label.cpp source\Main.cpp source\MenuState.cpp source\MusicPlayer.cpp source\ParticleNode.cpp source\PauseState.cpp source\Pickup.cpp source\Player.cpp source\Projectile.cpp source\SettingsState.cpp source\SoundNode.cpp source\SoundPlayer.cpp source\State.cpp source\StateStack.cpp source\TextNode.cpp source\TitleState.cpp source\World.cpp
+         World3.cpp
+         Generating Code...
+         Compiling...
+         World.cpp
          TitleState.cpp
+         TextNode.cpp
+         StateStack.cpp
+         State.cpp
+         SoundPlayer.cpp
+         SoundNode.cpp
+         SettingsState.cpp
+         Projectile.cpp
+         Player.cpp
+         Pickup.cpp
+         PauseState.cpp
+         ParticleNode.cpp
+         MusicPlayer.cpp
+         MenuState.cpp
+         Main.cpp
+         Label.cpp
+         GameState.cpp
+         GameOverState.cpp
+         EmitterNode.cpp
+         Generating Code...
+         Compiling...
+         DataTables.cpp
+         Button.cpp
+         BloomEffect.cpp
+         Application.cpp
+         Aircraft.cpp
+         World2.cpp
+         GameState3.cpp
+         GameState2.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\Debug\SFML_Assignment2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\\Include\lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\Debug\SFML_Assignment2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\Debug\SFML_Assignment2.lib" /MACHINE:X86 Debug\Aircraft.obj
          Debug\Animation.obj
@@ -18,6 +51,8 @@
          Debug\Entity.obj
          Debug\GameOverState.obj
          Debug\GameState.obj
+         Debug\GameState2.obj
+         Debug\GameState3.obj
          Debug\Label.obj
          Debug\Main.obj
          Debug\MenuState.obj
@@ -39,9 +74,11 @@
          Debug\TitleState.obj
          Debug\Utility.obj
          Debug\World.obj
+         Debug\World2.obj
+         Debug\World3.obj
          SFML_Assignment2.vcxproj -> C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\Debug\SFML_Assignment2.exe
      1>Done Building Project "C:\Users\Carlo Albino\Documents\GitHub\GAME2002-Assignment2\SFML_Assignment2\SFML_Assignment2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.08
+Time Elapsed 00:00:32.15

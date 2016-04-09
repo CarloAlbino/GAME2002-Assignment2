@@ -31,9 +31,11 @@ bool GameState::update(sf::Time dt)
 	}
 	else if (mWorld.hasPlayerReachedEnd())
 	{
-		mPlayer.setMissionStatus(Player::MissionSuccess);
-		requestStackPush(States::GameOver);
+		//mPlayer.setMissionStatus(Player::MissionSuccess);
+		requestStackPop();
+		requestStackPush(States::Game2);
 	}
+
 
 	CommandQueue& commands = mWorld.getCommandQueue();
 	mPlayer.handleRealtimeInput(commands);
