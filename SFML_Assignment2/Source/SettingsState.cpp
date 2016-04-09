@@ -13,12 +13,13 @@ SettingsState::SettingsState(StateStack& stack, Context context)
 	mBackgroundSprite.setTexture(context.textures->get(Textures::TitleScreen));
 	
 	// Build key binding buttons and labels
-	addButtonLabel(Player::MoveLeft,		300.f, "Move Left", context);
-	addButtonLabel(Player::MoveRight,		350.f, "Move Right", context);
-	addButtonLabel(Player::MoveUp,			400.f, "Move Up", context);
-	addButtonLabel(Player::MoveDown,		450.f, "Move Down", context);
-	addButtonLabel(Player::Fire,			500.f, "Fire", context);
-	addButtonLabel(Player::LaunchMissile,	550.f, "Missile", context);
+	addButtonLabel(Player::MoveLeft,		250.f, "Move Left", context);
+	addButtonLabel(Player::MoveRight,		300.f, "Move Right", context);
+	addButtonLabel(Player::MoveUp,			350.f, "Move Up", context);
+	addButtonLabel(Player::MoveDown,		400.f, "Move Down", context);
+	addButtonLabel(Player::Fire,			450.f, "Fire", context);
+	addButtonLabel(Player::LaunchMissile,	500.f, "Missile", context);
+	addButtonLabel(Player::FireArc,			550.f, "Fire Arc", context);
 
 	updateLabels();
 
@@ -43,12 +44,12 @@ bool SettingsState::update(sf::Time)
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
 		// Return to game
-		if (checkForButton(12))
+		if (checkForButton(14))
 			requestStackPop();
 	}
 	else
 	{
-		for (int i = 4; i < 13; i++)
+		for (int i = 0; i < 15; i++)
 			checkForButton(i);
 	}
 

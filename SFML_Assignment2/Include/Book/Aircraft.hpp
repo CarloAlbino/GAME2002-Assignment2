@@ -76,6 +76,7 @@ class Aircraft : public Entity
 		Command					mMissileCommand;
 		Command					mFireArcCommand;
 		sf::Time				mFireCountdown;
+		sf::Time				mFireArcCountdown;
 		bool 					mIsFiring;
 		bool					mIsFireArc;
 		bool					mIsLaunchingMissile;

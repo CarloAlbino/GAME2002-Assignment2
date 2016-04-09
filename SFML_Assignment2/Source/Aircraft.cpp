@@ -29,6 +29,7 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mMissileCommand()
 , mFireArcCommand()
 , mFireCountdown(sf::Time::Zero)
+, mFireArcCountdown(sf::Time::Zero)
 , mIsFiring(false)
 , mIsLaunchingMissile(false)
 , mShowExplosion(true)
@@ -66,7 +67,6 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 	mFireArcCommand.category = Category::SceneAirLayer;
 	mFireArcCommand.action = [this, &textures](SceneNode& node, sf::Time)
 	{
-		std::cout << "Fire Arc" << std::endl;
 		createBullets2(node, textures);
 	};
 
@@ -254,7 +254,9 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 {
 	// Enemies try to fire all the time
 	if (!isAllied())
+	{
 		fire();
+	}
 
 	// Check for automatic gunfire, allow only in intervals
 	if (mIsFiring && mFireCountdown <= sf::Time::Zero)
@@ -282,11 +284,22 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 		mIsLaunchingMissile = false;
 	}
 
-	if (mIsFireArc)
+	if (isAllied())
 	{
-		commands.push(mFireArcCommand);
+		if (mIsFireArc && mFireArcCountdown <= sf::Time::Zero)
+		{
+			commands.push(mFireArcCommand);
+			playLocalSound(commands, isAllied() ? SoundEffect::AlliedGunfire : SoundEffect::EnemyGunfire);
 
-		mIsFireArc = false;
+			mFireArcCountdown += Table[mType].fireInterval / (mFireRateLevel + 1.f) * 4.f;
+			mIsFireArc = false;
+		}
+		else if (mFireArcCountdown > sf::Time::Zero)
+		{
+			// Interval not expired: Decrease it further
+			mFireArcCountdown -= dt;
+			mIsFiring = false;
+		}
 	}
 }
 
@@ -328,17 +341,24 @@ void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xO
 
 void Aircraft::createBullets2(SceneNode& node, const TextureHolder& textures) const
 {
-	std::cout << "Why" << std::endl;
 	Projectile::Type type = isAllied() ? Projectile::AlliedBullet : Projectile::EnemyBullet;
 
 	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0, 1));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, 1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5, 0.8));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5, 0.5));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.8, 0.5));
 	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, 0));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, -1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.8, -0.5));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, -0.5));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0.5, -0.8));
 	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0, -1));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, -1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, -0.8));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, -0.5));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.8, -0.5));
 	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, 0));
-	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, 1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.8, 0.5));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, 0.5));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-0.5, 0.8));
 }
 
 void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures, sf::Vector2f dir) const
@@ -346,10 +366,10 @@ void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xO
 	std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
 
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
-	sf::Vector2f velocity = (this->getPosition() + dir) * projectile->getMaxSpeed();
+	sf::Vector2f velocity =  dir * projectile->getMaxSpeed();
 
 	float sign = isAllied() ? -1.f : +1.f;
-	projectile->setPosition(getWorldPosition() + offset * sign);
+	projectile->setPosition(this->getPosition() + offset * sign);
 	projectile->setVelocity(velocity * sign);
 	node.attachChild(std::move(projectile));
 }
