@@ -10,6 +10,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 
 #include <cmath>
+#include <iostream>
 
 
 using namespace std::placeholders;
@@ -26,6 +27,7 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mExplosion(textures.get(Textures::Explosion))
 , mFireCommand()
 , mMissileCommand()
+, mFireArcCommand()
 , mFireCountdown(sf::Time::Zero)
 , mIsFiring(false)
 , mIsLaunchingMissile(false)
@@ -59,6 +61,13 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 	mMissileCommand.action   = [this, &textures] (SceneNode& node, sf::Time)
 	{
 		createProjectile(node, Projectile::Missile, 0.f, 0.5f, textures);
+	};
+
+	mFireArcCommand.category = Category::SceneAirLayer;
+	mFireArcCommand.action = [this, &textures](SceneNode& node, sf::Time)
+	{
+		std::cout << "Fire Arc" << std::endl;
+		createBullets2(node, textures);
 	};
 
 	mDropPickupCommand.category = Category::SceneAirLayer;
@@ -188,6 +197,12 @@ void Aircraft::launchMissile()
 	}
 }
 
+void Aircraft::fireArc()
+{
+	if (Table[mType].fireInterval != sf::Time::Zero)
+		mIsFireArc = true;
+}
+
 void Aircraft::playLocalSound(CommandQueue& commands, SoundEffect::ID effect)
 {
 	sf::Vector2f worldPosition = getWorldPosition();
@@ -266,6 +281,13 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 
 		mIsLaunchingMissile = false;
 	}
+
+	if (mIsFireArc)
+	{
+		commands.push(mFireArcCommand);
+
+		mIsFireArc = false;
+	}
 }
 
 void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) const
@@ -297,6 +319,34 @@ void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xO
 
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
 	sf::Vector2f velocity(0, projectile->getMaxSpeed());
+
+	float sign = isAllied() ? -1.f : +1.f;
+	projectile->setPosition(getWorldPosition() + offset * sign);
+	projectile->setVelocity(velocity * sign);
+	node.attachChild(std::move(projectile));
+}
+
+void Aircraft::createBullets2(SceneNode& node, const TextureHolder& textures) const
+{
+	std::cout << "Why" << std::endl;
+	Projectile::Type type = isAllied() ? Projectile::AlliedBullet : Projectile::EnemyBullet;
+
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0, 1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, 1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, 0));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(1, -1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(0, -1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, -1));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, 0));
+	createProjectile(node, type, -0.5f, 0.33f, textures, sf::Vector2f(-1, 1));
+}
+
+void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures, sf::Vector2f dir) const
+{
+	std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
+
+	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
+	sf::Vector2f velocity = (this->getPosition() + dir) * projectile->getMaxSpeed();
 
 	float sign = isAllied() ? -1.f : +1.f;
 	projectile->setPosition(getWorldPosition() + offset * sign);

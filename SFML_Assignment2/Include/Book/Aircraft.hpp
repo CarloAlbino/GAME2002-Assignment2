@@ -45,6 +45,8 @@ class Aircraft : public Entity
 		void					setToMouse(bool b);
 		bool					canMoveToMouse();
 
+		void					fireArc();
+
 
 	private:
 		virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -60,6 +62,11 @@ class Aircraft : public Entity
 		void					updateTexts();
 		void					updateRollAnimation();
 
+		//[Carlo]
+		void					createBullets2(SceneNode& node, const TextureHolder& textures) const;
+		void					createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, 
+													const TextureHolder& textures, sf::Vector2f dir) const;
+
 
 	private:
 		Type					mType;
@@ -67,8 +74,10 @@ class Aircraft : public Entity
 		Animation				mExplosion;
 		Command 				mFireCommand;
 		Command					mMissileCommand;
+		Command					mFireArcCommand;
 		sf::Time				mFireCountdown;
 		bool 					mIsFiring;
+		bool					mIsFireArc;
 		bool					mIsLaunchingMissile;
 		bool 					mShowExplosion;
 		bool					mPlayedExplosionSound;

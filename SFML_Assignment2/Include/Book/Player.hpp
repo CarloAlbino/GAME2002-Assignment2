@@ -21,6 +21,7 @@ class Player
 			MoveDown,
 			Fire,
 			LaunchMissile,
+			FireArc,
 			ActionCount
 		};
 
