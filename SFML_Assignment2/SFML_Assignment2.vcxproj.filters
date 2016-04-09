@@ -123,6 +123,15 @@
     <ClCompile Include="Source\World2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameState2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameState3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\book\ResourceHolder.inl">
@@ -254,6 +263,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Book\World2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Book\GameState2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Book\GameState3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Book\World3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

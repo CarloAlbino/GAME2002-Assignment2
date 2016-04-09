@@ -3,7 +3,6 @@
 
 #include <Book/State.hpp>
 #include <Book/World.hpp>
-#include <Book/World2.hpp>
 #include <Book/Player.hpp>
 
 #include <SFML/Graphics/Sprite.hpp>
@@ -22,10 +21,7 @@ class GameState : public State
 
 	private:
 		World				mWorld;
-		World2				mWorld2;
 		Player&				mPlayer;
-
-		int					currentLevelNum;
 };
 
 #endif // BOOK_GAMESTATE_HPP

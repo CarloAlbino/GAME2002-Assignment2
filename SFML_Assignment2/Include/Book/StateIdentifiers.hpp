@@ -11,6 +11,7 @@ namespace States
 		Menu,
 		Game,
 		Game2, 
+		Game3,
 		Loading,
 		Pause,
 		Settings,
