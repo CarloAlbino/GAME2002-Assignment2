@@ -133,6 +133,7 @@ bool World::hasPlayerReachedEnd() const
 void World::loadTextures()
 {
 	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
+	mTextures.load(Textures::FireArc, "Media/Textures/FireArc.png");
 	mTextures.load(Textures::Jungle, "Media/Textures/Jungle.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
