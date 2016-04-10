@@ -16,6 +16,7 @@ namespace Textures
 	enum ID
 	{
 		Entities,
+		FireArc,
 		Jungle,
 		Lava,
 		Moss,

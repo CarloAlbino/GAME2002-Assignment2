@@ -38,11 +38,13 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mFireRateLevel(1)
 , mSpreadLevel(1)
 , mMissileAmmo(2)
+, mFireArcAmmo(4)
 , mDropPickupCommand()
 , mTravelledDistance(0.f)
 , mDirectionIndex(0)
 , mHealthDisplay(nullptr)
 , mMissileDisplay(nullptr)
+, mFireArcDisplay(nullptr)
 , mToMouse(false)
 {
 	mExplosion.setFrameSize(sf::Vector2i(256, 256));
@@ -86,6 +88,14 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 		missileDisplay->setPosition(0, 70);
 		mMissileDisplay = missileDisplay.get();
 		attachChild(std::move(missileDisplay));
+	}
+
+	if (getCategory() == Category::PlayerAircraft)
+	{
+		std::unique_ptr<TextNode> fireArcDisplay(new TextNode(fonts, ""));
+		fireArcDisplay->setPosition(0, 90);
+		mFireArcDisplay = fireArcDisplay.get();
+		attachChild(std::move(fireArcDisplay));
 	}
 
 	updateTexts();
@@ -181,6 +191,11 @@ void Aircraft::collectMissiles(unsigned int count)
 	mMissileAmmo += count;
 }
 
+void Aircraft::collectFireArc(unsigned int count)
+{
+	mFireArcAmmo += count;
+}
+
 void Aircraft::fire()
 {
 	// Only ships with fire interval != 0 are able to fire
@@ -199,8 +214,13 @@ void Aircraft::launchMissile()
 
 void Aircraft::fireArc()
 {
-	if (Table[mType].fireInterval != sf::Time::Zero)
-		mIsFireArc = true;
+	//if (Table[mType].fireInterval != sf::Time::Zero)
+	if (mFireArcAmmo > 0)
+	{
+		if (Table[mType].fireInterval != sf::Time::Zero){
+			mIsFireArc = true;
+		}
+	}
 }
 
 void Aircraft::playLocalSound(CommandQueue& commands, SoundEffect::ID effect)
@@ -244,7 +264,7 @@ void Aircraft::updateMovementPattern(sf::Time dt)
 
 void Aircraft::checkPickupDrop(CommandQueue& commands)
 {
-	if (!isAllied() && randomInt(3) == 0 && !mSpawnedPickup)
+	if (!isAllied() && randomInt(1) == 0 && !mSpawnedPickup)
 		commands.push(mDropPickupCommand);
 
 	mSpawnedPickup = true;
@@ -284,7 +304,25 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 		mIsLaunchingMissile = false;
 	}
 
-	if (isAllied())
+	if (isAllied() && mIsFireArc && mFireArcCountdown <= sf::Time::Zero)
+	{
+		commands.push(mFireArcCommand);
+		playLocalSound(commands, isAllied() ? SoundEffect::AlliedGunfire : SoundEffect::EnemyGunfire);
+
+		mFireArcCountdown += Table[mType].fireInterval / (mFireRateLevel + 1.f);
+		mFireCountdown *= 4.f;
+
+		mIsFireArc = false;
+		--mFireArcAmmo;
+	}
+	else if (isAllied() && mIsFireArc && mFireArcCountdown > sf::Time::Zero)
+	{
+		// Interval not expired: Decrease it further
+		mFireArcCountdown -= dt;
+		mIsFiring = false;
+	}
+
+	/*if (isAllied())
 	{
 		if (mIsFireArc && mFireArcCountdown <= sf::Time::Zero)
 		{
@@ -300,7 +338,7 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 			mFireArcCountdown -= dt;
 			mIsFiring = false;
 		}
-	}
+	}*/
 }
 
 void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) const
@@ -401,6 +439,14 @@ void Aircraft::updateTexts()
 			mMissileDisplay->setString("");
 		else
 			mMissileDisplay->setString("M: " + toString(mMissileAmmo));
+	}
+
+	if (mFireArcDisplay)
+	{
+		if (mFireArcAmmo == 0 || isDestroyed())
+			mFireArcDisplay->setString("");
+		else
+			mFireArcDisplay->setString("FA: " + toString(mFireArcAmmo));
 	}
 }
 

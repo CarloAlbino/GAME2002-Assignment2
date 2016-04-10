@@ -25,7 +25,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 , mSceneLayers()
 , mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
 , mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
-, mScrollSpeed(-500.f)
+, mScrollSpeed(-40.f)
 , mPlayerAircraft(nullptr)
 , mEnemySpawnPoints()
 , mActiveEnemies()
@@ -133,6 +133,7 @@ bool World::hasPlayerReachedEnd() const
 void World::loadTextures()
 {
 	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
+	mTextures.load(Textures::FireArc, "Media/Textures/FireArc.png");
 	mTextures.load(Textures::Jungle, "Media/Textures/Jungle.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
@@ -434,7 +435,7 @@ void World::moveToMousePos()
 		newPlayerPosition.x /= newMagnitude;		//
 		newPlayerPosition.y /= newMagnitude;		// Normalize the vector
 		// Set speed to 15
-		newPlayerPosition *= 15.f;
+		newPlayerPosition *= 20.f;
 		// Send new position to the airplane
 		newPlayerPosition += mPlayerAircraft->getPosition();	// Add the new position to the player's current position
 		mPlayerAircraft->setPosition(newPlayerPosition);		// Set the player's new position

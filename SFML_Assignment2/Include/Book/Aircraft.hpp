@@ -36,6 +36,7 @@ class Aircraft : public Entity
 		void					increaseFireRate();
 		void					increaseSpread();
 		void					collectMissiles(unsigned int count);
+		void					collectFireArc(unsigned int count);
 
 		void 					fire();
 		void					launchMissile();
@@ -87,12 +88,14 @@ class Aircraft : public Entity
 		int						mFireRateLevel;
 		int						mSpreadLevel;
 		int						mMissileAmmo;
+		int						mFireArcAmmo;
 
 		Command 				mDropPickupCommand;
 		float					mTravelledDistance;
 		std::size_t				mDirectionIndex;
 		TextNode*				mHealthDisplay;
 		TextNode*				mMissileDisplay;
+		TextNode*				mFireArcDisplay;
 
 		//[Carlo]
 		bool					mToMouse;

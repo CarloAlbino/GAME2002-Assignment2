@@ -77,6 +77,10 @@ std::vector<PickupData> initializePickupData()
 	data[Pickup::MissileRefill].texture = Textures::Entities;
 	data[Pickup::MissileRefill].textureRect = sf::IntRect(40, 64, 40, 40);
 	data[Pickup::MissileRefill].action = std::bind(&Aircraft::collectMissiles, _1, 3);
+
+	data[Pickup::FireArcRefill].texture = Textures::FireArc;
+	data[Pickup::FireArcRefill].textureRect = sf::IntRect(0, 0, 40, 40);
+	data[Pickup::FireArcRefill].action = std::bind(&Aircraft::collectFireArc, _1, 3);
 	
 	data[Pickup::FireSpread].texture = Textures::Entities;
 	data[Pickup::FireSpread].textureRect = sf::IntRect(80, 64, 40, 40);
