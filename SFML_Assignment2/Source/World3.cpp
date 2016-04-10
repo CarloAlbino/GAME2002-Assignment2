@@ -25,7 +25,7 @@ World3::World3(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& s
 	, mSceneLayers2()
 	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
 	, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
-	, mScrollSpeed(-500.f)
+	, mScrollSpeed(-100.f)
 	, mPlayerAircraft(nullptr)
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
@@ -293,31 +293,37 @@ void World3::buildScene()
 void World3::addEnemies()
 {
 	// Add enemies to the spawn point container
-	addEnemy(Aircraft::Raptor, 0.f, 500.f);
+	addEnemy(Aircraft::Raptor, -200.f, 1000.f);
 	addEnemy(Aircraft::Raptor, 0.f, 1000.f);
-	addEnemy(Aircraft::Raptor, +100.f, 1150.f);
-	addEnemy(Aircraft::Raptor, -100.f, 1150.f);
-	addEnemy(Aircraft::Avenger, 70.f, 1500.f);
-	addEnemy(Aircraft::Avenger, -70.f, 1500.f);
+	addEnemy(Aircraft::Raptor, 200.f, 1000.f);
+	addEnemy(Aircraft::Raptor, 0.f, 1150.f);
+	addEnemy(Aircraft::Avenger, 100.f, 1150.f);
+	addEnemy(Aircraft::Avenger, -100.f, 1150.f);
 	addEnemy(Aircraft::Avenger, -70.f, 1710.f);
 	addEnemy(Aircraft::Avenger, 70.f, 1700.f);
 	addEnemy(Aircraft::Avenger, 30.f, 1850.f);
-	addEnemy(Aircraft::Raptor, 300.f, 2200.f);
-	addEnemy(Aircraft::Raptor, -300.f, 2200.f);
+	addEnemy(Aircraft::Raptor, 400.f, 2200.f);
+	addEnemy(Aircraft::Raptor, -400.f, 2200.f);
 	addEnemy(Aircraft::Raptor, 0.f, 2200.f);
 	addEnemy(Aircraft::Raptor, 0.f, 2500.f);
-	addEnemy(Aircraft::Avenger, -300.f, 2700.f);
-	addEnemy(Aircraft::Avenger, -300.f, 2700.f);
+	addEnemy(Aircraft::Avenger, 0.f, 2600.f);
+	addEnemy(Aircraft::Avenger, 0.f, 2700.f);
 	addEnemy(Aircraft::Raptor, 0.f, 3000.f);
-	addEnemy(Aircraft::Raptor, 250.f, 3250.f);
-	addEnemy(Aircraft::Raptor, -250.f, 3250.f);
-	addEnemy(Aircraft::Avenger, 0.f, 3500.f);
-	addEnemy(Aircraft::Avenger, 0.f, 3700.f);
+	addEnemy(Aircraft::Raptor, 250.f, 3100.f);
+	addEnemy(Aircraft::Raptor, -250.f, 3100.f);
+	addEnemy(Aircraft::Avenger, 350.f, 3200.f);
+	addEnemy(Aircraft::Avenger, -350.f, 3200.f);
 	addEnemy(Aircraft::Raptor, 0.f, 3800.f);
-	addEnemy(Aircraft::Avenger, 0.f, 4000.f);
-	addEnemy(Aircraft::Avenger, -200.f, 4200.f);
+	addEnemy(Aircraft::Avenger, -400.f, 4000.f);
+	addEnemy(Aircraft::Avenger, 400.f, 4200.f);
 	addEnemy(Aircraft::Raptor, 200.f, 4200.f);
-	addEnemy(Aircraft::Raptor, 0.f, 4400.f);
+	addEnemy(Aircraft::Raptor, 0.f, 4200.f);
+	addEnemy(Aircraft::Raptor, 150.f, 4400.f);
+	addEnemy(Aircraft::Raptor, 300.f, 4400.f);
+	addEnemy(Aircraft::Raptor, 450.f, 4400.f);
+	addEnemy(Aircraft::Raptor, -150.f, 4400.f);
+	addEnemy(Aircraft::Raptor, -300.f, 4400.f);
+	addEnemy(Aircraft::Raptor, -450.f, 4400.f);
 
 
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
@@ -434,7 +440,7 @@ void World3::moveToMousePos()
 		newPlayerPosition.x /= newMagnitude;		//
 		newPlayerPosition.y /= newMagnitude;		// Normalize the vector
 		// Set speed to 15
-		newPlayerPosition *= 15.f;
+		newPlayerPosition *= 20.f;
 		// Send new position to the airplane
 		newPlayerPosition += mPlayerAircraft->getPosition();	// Add the new position to the player's current position
 		mPlayerAircraft->setPosition(newPlayerPosition);		// Set the player's new position
