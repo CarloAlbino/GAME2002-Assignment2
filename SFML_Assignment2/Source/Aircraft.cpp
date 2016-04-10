@@ -38,7 +38,7 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 , mFireRateLevel(1)
 , mSpreadLevel(1)
 , mMissileAmmo(2)
-, mFireArcAmmo(1)
+, mFireArcAmmo(4)
 , mDropPickupCommand()
 , mTravelledDistance(0.f)
 , mDirectionIndex(0)
@@ -219,7 +219,6 @@ void Aircraft::fireArc()
 	{
 		if (Table[mType].fireInterval != sf::Time::Zero){
 			mIsFireArc = true;
-			--mFireArcAmmo;
 		}
 	}
 }
@@ -310,7 +309,11 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 		commands.push(mFireArcCommand);
 		playLocalSound(commands, isAllied() ? SoundEffect::AlliedGunfire : SoundEffect::EnemyGunfire);
 
+		mFireArcCountdown += Table[mType].fireInterval / (mFireRateLevel + 1.f);
+		mFireCountdown *= 4.f;
+
 		mIsFireArc = false;
+		--mFireArcAmmo;
 	}
 	else if (isAllied() && mIsFireArc && mFireArcCountdown > sf::Time::Zero)
 	{
